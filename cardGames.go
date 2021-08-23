@@ -8,6 +8,9 @@ import (
 )
 
 func main() {
+	//Default Settings
+	defaultLanguage := language("English")
+
 	//Get the API_Token
 	botToken, err := getToken("@MG_Telegram_bot")
 	if err != nil {
@@ -41,22 +44,32 @@ func main() {
 			continue
 		}
 
+		response := tgbotapi.NewMessage(update.Message.Chat.ID, "")
+		response.ReplyToMessageID = update.Message.MessageID
+
 		if update.Message.IsCommand() {
 			switch update.Message.Command() {
 			case "start":
-			case "help":
+				//Check if this is the first time this user has used /start
+				_, userAlredyExist := usersSettings[user(update.Message.From.UserName)]
+				if !userAlredyExist {
+					//Create a new userSettings
+					usersSettings[user(update.Message.From.UserName)] = settings{language: defaultLanguage}
+				}
+
+				//Get the language set for the user and write the welcome message
+				settings := usersSettings[user(update.Message.From.UserName)]
+				msg := messages["Welcoming"]
+				if isSupported(settings.language) {
+					response.Text = strings.Join(msg[settings.language], "")
+				} else {
+					//TODO: Implemets Logrus to make a log file and report the error "Language not supported".
+					response.Text = strings.Join(msg[defaultLanguage], "")
+				}
 			}
 		}
 
-		response := tgbotapi.NewMessage(update.Message.Chat.ID, "")
-		response.ReplyToMessageID = update.Message.MessageID
-		if !strings.Contains(update.Message.Text, "?") {
-			response.Text = "Non stai inviando una domanda! Rispondi ad una domanda ricevuta o formula una domanda?"
-			botAPI.Send(response)
-			continue
-		}
-		response.Text = "Domanda inviata!"
-		response.BaseChat.ReplyMarkup = standardButtonsMarkup()
+		//response.BaseChat.ReplyMarkup = standardButtonsMarkup()
 
 		//log.Printf("[%s] %s", update.Message.From.UserName, update.Message.Text)
 

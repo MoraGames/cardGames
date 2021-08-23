@@ -1,0 +1,13 @@
+package main
+
+type user string
+
+type settings struct {
+	language string
+}
+
+var usersSettings = map[user]settings{
+	"MoraGames": {
+		language: "Italiano"
+	}
+}
