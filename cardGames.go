@@ -9,7 +9,7 @@ import (
 
 func main() {
 	//Default Settings
-	defaultLanguage := language("English")
+	defaultLanguage := languages.language("English")
 
 	//Get the API_Token
 	botToken, err := getToken("@MG_Telegram_bot")
