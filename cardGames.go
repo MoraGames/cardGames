@@ -4,7 +4,7 @@ import (
 	"log"
 	"strings"
 
-	"github.com/MoraGames/cardGames/pkg/internal/languages"
+	"pkg/internal/languages"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
