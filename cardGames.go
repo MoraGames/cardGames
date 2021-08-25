@@ -4,12 +4,16 @@ import (
 	"log"
 	"strings"
 
+	"github.com/MoraGames/cardGames/pkg/internal/languages"
+
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
 func main() {
+
 	//Default Settings
-	defaultLanguage := language("English")
+	//isSup := languages.isSupported("English")
+	defaultLanguage := languages.Language("English")
 
 	//Get the API_Token
 	botToken, err := getToken("@MG_Telegram_bot")

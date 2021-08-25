@@ -1,12 +1,14 @@
 package users
 
-type user string
+import "github.com/MoraGames/cardGames/pkg/internal/languages"
 
-type settings struct {
-	language language
+type User string
+
+type Settings struct {
+	language languages.Language
 }
 
-var usersSettings = map[user]settings{
+var UsersSettings = map[User]Settings{
 	"MoraGames": {
 		language: "Italiano",
 	},

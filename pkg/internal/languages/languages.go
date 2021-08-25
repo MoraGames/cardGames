@@ -1,14 +1,14 @@
 package languages
 
-type language string
+type Language string
 
-var supportedLanguages = []language{
+var SupportedLanguages = []Language{
 	"Italiano",
 	"English",
 }
 
-func isSupported(lang language) bool {
-	for _, l := range supportedLanguages {
+func IsSupported(lang Language) bool {
+	for _, l := range SupportedLanguages {
 		if lang == l {
 			return true
 		}
@@ -16,9 +16,9 @@ func isSupported(lang language) bool {
 	return false
 }
 
-type message string
+type Message string
 
-var messages = map[message]map[language][]string{
+var Messages = map[Message]map[Language][]string{
 	"Welcoming": {
 		"Italiano": {"Ciao! Io sono cardGames, un bot che raccoglie diversi giochi di carte. Sentiti libero di giocare con i tuoi amici o contro di me!\n\nUsa /help per una lista di tutti i comandi.\n\n\n- Sviluppatore: @MoraGames"},
 		"English":  {"Hi! I'm cardGames, a bot that collects different card games. Feel free to play with your friends or against me!\n\nUse /help for a list of all commands.\n\n\n- Developer: @MoraGames"},
